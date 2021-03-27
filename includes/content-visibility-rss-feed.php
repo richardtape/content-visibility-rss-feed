@@ -100,6 +100,13 @@ function rule_logic_rss_feed( $rule_value, $block_visibility, $block ) {
 	// If 'hidden' is selected, and the checkbox is checked, then this block will be hidden.
 	$checkbox_is_checked = ( 1 === absint( $rule_value['rss'] ) ) ? true : false;
 
+	// Checkbox not checked? Bail.
+	if ( false === $checkbox_is_checked ) {
+		return true;
+	}
+
+	$currently_on_rss_feed = is_feed();
+
 	/*
 	* This is the end game for add-ons. Determine here whether to hide this block, or keep it
 	* for other add-ons to determine whether it should be removed or not.
@@ -114,10 +121,14 @@ function rule_logic_rss_feed( $rule_value, $block_visibility, $block ) {
 	*/
 	switch ( $block_visibility ) {
 		case 'shown':
-			return $checkbox_is_checked;
+			return $currently_on_rss_feed;
 
 		case 'hidden':
-			return ! $checkbox_is_checked;
+			if ( $currently_on_rss_feed ) {
+				return false;
+			} else {
+				true;
+			}
 	}
 
 }//end rule_logic_rss_feed()
