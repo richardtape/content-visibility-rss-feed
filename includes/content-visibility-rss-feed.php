@@ -124,11 +124,7 @@ function rule_logic_rss_feed( $rule_value, $block_visibility, $block ) {
 			return $currently_on_rss_feed;
 
 		case 'hidden':
-			if ( $currently_on_rss_feed ) {
-				return false;
-			} else {
-				true;
-			}
+			return ! $currently_on_rss_feed;
 	}
 
 }//end rule_logic_rss_feed()
