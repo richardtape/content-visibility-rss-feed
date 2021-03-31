@@ -296,7 +296,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_editor_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/editor.css */ "./src/styles/editor.css");
 /* harmony import */ var _styles_editor_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_styles_editor_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _controls_content_visibility_addon_starter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controls/content-visibility-addon-starter */ "./src/controls/content-visibility-addon-starter.js");
-// Import CSS from the src director. This will be built into /build/index.css by default.
+// Import CSS from the src directory. This will be built into /build/index.css by default.
 
 
 
