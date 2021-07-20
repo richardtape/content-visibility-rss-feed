@@ -27,7 +27,7 @@ import { addFilter } from '@wordpress/hooks';
  */
 import { PanelBody, PanelRow } from '@wordpress/components';
 import { CheckboxControl } from '@wordpress/components';
-
+import hasRules from '../helpers/has-rules';
 
 /*
 * For brevity, this add-ons controls are in this file, but it may be more ideal to load them
@@ -51,6 +51,8 @@ function ContentVisibilityRSSFeedPanelBodyControl( { props } ) {
     // otherwise we fall back to whatever isChecked is which will change when someone alters the value of the checkbox
     let thisChecked = persistedData.hasOwnProperty( 'rssFeed' ) && persistedData.rssFeed.hasOwnProperty( dataKey ) && '1' === props.attributes.contentVisibilityRules.rssFeed[ dataKey ];
 
+    let hasRulesClass = ( hasRules( props, 'rssFeed' ) ) ? ' has-active-rules' : '';
+
     /**
      * As it stands, this checkbox will add data to the database such as this, if the content visibility rules
      * are added to a paragraph block (truncated a little for brevity)
@@ -64,7 +66,7 @@ function ContentVisibilityRSSFeedPanelBodyControl( { props } ) {
         <PanelBody
             title={ __( 'RSS Feed', 'content-visibility-rss-feed' ) }
             initialOpen={ false }
-            className="content-visibility-control-panel content-visibility-rss-feed-controls"
+            className={"content-visibility-control-panel content-visibility-rss-feed-controls" + hasRulesClass}
         >
             <PanelRow>
                 <CheckboxControl

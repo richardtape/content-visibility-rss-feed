@@ -113,10 +113,10 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
-/***/ "./src/controls/content-visibility-addon-starter.js":
-/*!**********************************************************!*\
-  !*** ./src/controls/content-visibility-addon-starter.js ***!
-  \**********************************************************/
+/***/ "./src/controls/content-visibility-rss-feed.js":
+/*!*****************************************************!*\
+  !*** ./src/controls/content-visibility-rss-feed.js ***!
+  \*****************************************************/
 /*! exports provided: ContentVisibilityRSSFeedControl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -135,6 +135,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_plugins__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_plugins__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _helpers_has_rules__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helpers/has-rules */ "./src/helpers/has-rules.js");
 
 
 
@@ -171,6 +172,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
+
 /*
 * For brevity, this add-ons controls are in this file, but it may be more ideal to load them
 * in a separate file and import`ing them here.
@@ -189,6 +191,7 @@ function ContentVisibilityRSSFeedPanelBodyControl(_ref) {
   // otherwise we fall back to whatever isChecked is which will change when someone alters the value of the checkbox
 
   var thisChecked = persistedData.hasOwnProperty('rssFeed') && persistedData.rssFeed.hasOwnProperty(dataKey) && '1' === props.attributes.contentVisibilityRules.rssFeed[dataKey];
+  var hasRulesClass = Object(_helpers_has_rules__WEBPACK_IMPORTED_MODULE_6__["default"])(props, 'rssFeed') ? ' has-active-rules' : '';
   /**
    * As it stands, this checkbox will add data to the database such as this, if the content visibility rules
    * are added to a paragraph block (truncated a little for brevity)
@@ -202,7 +205,7 @@ function ContentVisibilityRSSFeedPanelBodyControl(_ref) {
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('RSS Feed', 'content-visibility-rss-feed'),
     initialOpen: false,
-    className: "content-visibility-control-panel content-visibility-rss-feed-controls"
+    className: "content-visibility-control-panel content-visibility-rss-feed-controls" + hasRulesClass
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["CheckboxControl"], {
     label: "RSS Feed",
     checked: thisChecked,
@@ -284,6 +287,59 @@ function registerContentVisibilityRule(defaultRules) {
 
 /***/ }),
 
+/***/ "./src/helpers/has-rules.js":
+/*!**********************************!*\
+  !*** ./src/helpers/has-rules.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__);
+
+/**
+ * Determine if the passed block props contain rules of the passed type.
+ *
+ * @param {object} props The currently selected block's props.
+ * @param {string} type The type of the rules i.e. userAuthenticated or specialPage (or ones from add-ons).
+ *
+ * @return {bool} true if the passed props contain non-empty rules of the passed type. False otherwise.
+ */
+
+function hasRules(props, type) {
+  if (!props.attributes.contentVisibilityRules) {
+    return false;
+  }
+
+  if (!props.attributes.contentVisibilityRules[type]) {
+    return false;
+  } // Default to false. Passed through a filter later.
+
+
+  var hasRules = false;
+
+  switch (type) {
+    case 'rssFeed':
+      if (props.attributes.contentVisibilityRules[type] && props.attributes.contentVisibilityRules[type]['rss'] === "1") {
+        hasRules = true;
+      }
+
+      break;
+
+    default:
+      break;
+  }
+
+  return Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__["applyFilters"])('content-visibility-has-rules', hasRules, props, type);
+} // end hasRules()
+
+
+/* harmony default export */ __webpack_exports__["default"] = (hasRules);
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -295,7 +351,7 @@ function registerContentVisibilityRule(defaultRules) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_editor_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/editor.css */ "./src/styles/editor.css");
 /* harmony import */ var _styles_editor_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_styles_editor_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _controls_content_visibility_addon_starter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controls/content-visibility-addon-starter */ "./src/controls/content-visibility-addon-starter.js");
+/* harmony import */ var _controls_content_visibility_rss_feed__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controls/content-visibility-rss-feed */ "./src/controls/content-visibility-rss-feed.js");
 // Import CSS from the src directory. This will be built into /build/index.css by default.
 
 
