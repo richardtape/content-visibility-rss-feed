@@ -3,8 +3,8 @@ Contributors: iamfriendly
 Donate link: https://girlswhocode.com/
 Tags: contentvisibility, block, content, visibility, rss, feed
 Requires at least: 5.0
-Tested up to: 5.8.0
-Stable tag: 0.1.2
+Tested up to: 6.1.1
+Stable tag: 0.1.3
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -33,6 +33,10 @@ Let me know: [https://github.com/richardtape/content-visibility-rss-feed/issues/
 1. Showing the content visibility RSS Feed controls in the content editor sidebar
 
 == Changelog ==
+
+= 0.1.3 =
+* WP 6.1.1 compatibility.
+* Fixed warning in widgets screen.
 
 = 0.1.2 =
 * Added small icon to indicate when a block has RSS Feed rules.

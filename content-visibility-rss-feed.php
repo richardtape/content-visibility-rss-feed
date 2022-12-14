@@ -11,7 +11,7 @@
  * Plugin Name: Content Visibility RSS Feed
  * Plugin URI:  https://richardtape.com/content-visibility/
  * Description: [Content Visibility Add-On] Show or hide your content for those folks consuming your content with RSS.
- * Version:     0.1.2
+ * Version:     0.1.3
  * Author:      Richard Tape
  * Author URI:  https://richardtape.com
  * Text Domain: content-visibility-rss-feed
